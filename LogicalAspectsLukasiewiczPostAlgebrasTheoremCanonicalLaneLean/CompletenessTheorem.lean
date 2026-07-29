@@ -1,0 +1,11 @@
+import canonicalLaneMathlib.AdmissibleClass
+import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.LukasiewiczAlgebra
+
+namespace HautevilleHouse
+namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
+
+theorem completeness (L : LukasiewiczAlgebra) : LukasiewiczAlgebraClosed L := by
+  exact L.axioms
+
+end LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
+end HautevilleHouse

@@ -1,13 +1,14 @@
-import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.GateLemmas
+import canonicalLaneMathlib.AdmissibleClass
+import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.AdmissibleClassBridge
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 
-def ConstrainedLogicalAspectsClosure (A : AdmissibleClass) : Prop :=
+def ConstrainedLukasiewiczPostClosure (A : LukasiewiczAdmissibleClass) : Prop :=
   bridgeClosed A ∧ gateClosed A
 
-theorem constrained_logical_aspects_endgame (A : AdmissibleClass) :
-    ConstrainedLogicalAspectsClosure A := by
+theorem constrained_lukasiewicz_post_endgame (A : LukasiewiczAdmissibleClass) :
+    ConstrainedLukasiewiczPostClosure A := by
   exact And.intro (bridge_from_admissible_class A) (gate_from_admissible_class A)
 
 end LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
