@@ -1,4 +1,4 @@
-import latticeGateLemmas
+import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.GateLemmas
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean

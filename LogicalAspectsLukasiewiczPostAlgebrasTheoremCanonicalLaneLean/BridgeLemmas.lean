@@ -1,10 +1,10 @@
-import latticeAdmissibleClass
+import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.Projection
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 
 def bridgeClosed (A : AdmissibleClass) : Prop :=
-  PostAlgebrasWitnessClosed A.object
+  PostWitnessClosed A.object
 
 theorem bridge_from_admissible_class (A : AdmissibleClass) :
     bridgeClosed A := by
