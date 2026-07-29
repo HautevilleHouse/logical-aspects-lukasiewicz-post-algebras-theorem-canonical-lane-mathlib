@@ -1,16 +1,16 @@
-import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.MathlibObjects
+import latticeAdmissibleClass
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 
 structure AdmissibleClass where
-  object : LukasiewiczPostAdmittedObject
+  object : PostAlgebrasAdmittedObject
   endpointSatisfied : Prop
   remainderRecorded : Prop
   gateWitness : endpointSatisfied ∨ remainderRecorded
 
 def admittedClosure (A : AdmissibleClass) : Prop :=
-  LukasiewiczPostWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
+  PostAlgebrasWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
 
 end LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 end HautevilleHouse

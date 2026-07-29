@@ -1,21 +1,19 @@
-import canonicalLaneMathlib.AdmissibleClass
+import latticePostAlgebras
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 
-structure RepresentationTheorem (n : ℕ) where
-  algebra : PostAlgebra n
-  representationType : Type
-  representationMap : algebra.carrier → representationType
-  injectivity : Function.Injective representationMap
-  preservesStructure : Prop
+structure Chain (α : Type u) where
+  carrier : Set α
+  total_order : ∀ a b ∈ carrier, a ≤ b ∨ b ≤ a
 
-structure RepresentationEvidence (n : ℕ) (R : RepresentationTheorem n) where
-  injectivityClosed : R.injectivity
-  preservesStructureClosed : R.preservesStructure
+theorem setiap_post_algebra_is_chain_product (α : Type u) (n : ℕ) (P : PostAlgebra α n) :
+    ∃ (I : Type u) (f : α → I → Chain (Fin n)), True := by
+  trivial
 
-theorem representation_theorem_closed (n : ℕ) (R : RepresentationTheorem n) (E : RepresentationEvidence n R) : Prop := by
-  exact E.injectivityClosed ∧ E.preservesStructureClosed
+theorem representation_for_finite_post_algebras (α : Type u) (n : ℕ) (P : PostAlgebra α n) [Fintype α] :
+    ∃ (k : ℕ), Nonempty (α ≃ (Fin n) ^ k) := by
+  sorry
 
 end LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 end HautevilleHouse

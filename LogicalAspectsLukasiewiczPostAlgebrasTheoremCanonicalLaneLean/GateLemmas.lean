@@ -1,4 +1,4 @@
-import canonicalLaneMathlib.AdmissibleClass
+import latticeBridgeLemmas
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean

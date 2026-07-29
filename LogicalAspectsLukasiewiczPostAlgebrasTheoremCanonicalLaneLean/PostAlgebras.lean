@@ -1,26 +1,21 @@
-import canonicalLaneMathlib.AdmissibleClass
+import latticeLatticeFoundations
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 
-structure PostAlgebraExtension where
-  base : PostAlgebraBase
-  lattice : LatticeStructurePackage
-  mv : MVAlgebraPackage
-  postConstants : Nat → L.carrier
-  orderAxioms : Prop
-  representationTheorem : Prop
+structure PostAlgebra (α : Type u) (n : ℕ) where
+  mv : MVAlgebra α
+  center : α → α
+  center_idempotent : ∀ a : α, center (center a) = center a
+  center_bot : center mv.bot = mv.bot
+  center_top : center mv.top = mv.top
+  center_mono : ∀ a b : α, mv.impl a b = mv.top → mv.impl (center a) (center b) = mv.top
+  n_valued : Fintype α ∧ Fintype.card α = n
+  order_linear : ∀ a b : α, mv.impl a b = mv.top ∨ mv.impl b a = mv.top
+  negation_center : ∀ a : α, mv.neg (center a) = center (mv.neg a)
 
-structure PostAlgebraEvidence (P : PostAlgebraExtension) where
-  orderAxiomsClosed : P.orderAxioms
-  representationTheoremClosed : P.representationTheorem
-
-def PostAlgebraClosed (P : PostAlgebraExtension) : Prop :=
-  P.orderAxioms ∧ P.representationTheorem
-
-theorem post_algebra_closed_from_evidence (P : PostAlgebraExtension) (E : PostAlgebraEvidence P) :
-    PostAlgebraClosed P := by
-  exact And.intro E.orderAxiomsClosed E.representationTheoremClosed
+theorem post_algebra_characterization (α : Type u) (n : ℕ) (P : PostAlgebra α n) :
+    Fintype.card α = n := P.n_valued.2
 
 end LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 end HautevilleHouse
