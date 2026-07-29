@@ -1,31 +1,21 @@
 import canonicalLaneMathlib.AdmissibleClass
-import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.PostAlgebraStructure
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 
-structure RepresentationTheoremPackage {L : LukasiewiczAlgebra}
-    (P : PostAlgebraStructure L) where
-  representationType : Type u
-  homomorphismExists : Prop
-  homomorphismInjective : Prop
-  representationComplete : Prop
+structure RepresentationTheorem (n : ℕ) where
+  algebra : PostAlgebra n
+  representationType : Type
+  representationMap : algebra.carrier → representationType
+  injectivity : Function.Injective representationMap
+  preservesStructure : Prop
 
-structure RepresentationTheoremEvidence {L : LukasiewiczAlgebra}
-    {P : PostAlgebraStructure L} (R : RepresentationTheoremPackage P) where
-  homomorphismExistsClosed : R.homomorphismExists
-  homomorphismInjectiveClosed : R.homomorphismInjective
-  representationCompleteClosed : R.representationComplete
+structure RepresentationEvidence (n : ℕ) (R : RepresentationTheorem n) where
+  injectivityClosed : R.injectivity
+  preservesStructureClosed : R.preservesStructure
 
-def RepresentationTheoremClosed {L : LukasiewiczAlgebra}
-    {P : PostAlgebraStructure L} (R : RepresentationTheoremPackage P) : Prop :=
-  R.homomorphismExists ∧ R.homomorphismInjective ∧ R.representationComplete
-
-theorem representation_theorem_closed_from_evidence {L : LukasiewiczAlgebra}
-    {P : PostAlgebraStructure L} (R : RepresentationTheoremPackage P)
-    (E : RepresentationTheoremEvidence R) : RepresentationTheoremClosed R := by
-  exact And.intro E.homomorphismExistsClosed
-    (And.intro E.homomorphismInjectiveClosed E.representationCompleteClosed)
+theorem representation_theorem_closed (n : ℕ) (R : RepresentationTheorem n) (E : RepresentationEvidence n R) : Prop := by
+  exact E.injectivityClosed ∧ E.preservesStructureClosed
 
 end LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 end HautevilleHouse
