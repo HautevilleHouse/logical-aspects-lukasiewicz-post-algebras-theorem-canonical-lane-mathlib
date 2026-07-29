@@ -1,34 +1,27 @@
 import canonicalLaneMathlib.AdmissibleClass
-import LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean.RepresentationTheorem
 
 namespace HautevilleHouse
 namespace LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 
-structure CompletenessTheoremPackage {L : LukasiewiczAlgebra}
-    {P : PostAlgebraStructure L} {R : RepresentationTheoremPackage P} where
-  formulaModel : Type u
-  validityImpliesTheorem : Prop
-  theoremImpliesValidity : Prop
+structure CompletenessTheoremPackage where
+  postAlgebra : PostAlgebraExtension
+  deductiveSystem : Prop
+  soundness : Prop
   completeness : Prop
+  finiteModelProperty : Prop
 
-structure CompletenessTheoremEvidence {L : LukasiewiczAlgebra}
-    {P : PostAlgebraStructure L} {R : RepresentationTheoremPackage P}
-    (C : CompletenessTheoremPackage R) where
-  validityImpliesTheoremClosed : C.validityImpliesTheorem
-  theoremImpliesValidityClosed : C.theoremImpliesValidity
+structure CompletenessTheoremEvidence (C : CompletenessTheoremPackage) where
+  deductiveSystemClosed : C.deductiveSystem
+  soundnessClosed : C.soundness
   completenessClosed : C.completeness
+  finiteModelPropertyClosed : C.finiteModelProperty
 
-def CompletenessTheoremClosed {L : LukasiewiczAlgebra}
-    {P : PostAlgebraStructure L} {R : RepresentationTheoremPackage P}
-    (C : CompletenessTheoremPackage R) : Prop :=
-  C.validityImpliesTheorem ∧ C.theoremImpliesValidity ∧ C.completeness
+def CompletenessTheoremClosed (C : CompletenessTheoremPackage) : Prop :=
+  C.deductiveSystem ∧ C.soundness ∧ C.completeness ∧ C.finiteModelProperty
 
-theorem completeness_theorem_closed_from_evidence {L : LukasiewiczAlgebra}
-    {P : PostAlgebraStructure L} {R : RepresentationTheoremPackage P}
-    (C : CompletenessTheoremPackage R) (E : CompletenessTheoremEvidence C) :
+theorem completeness_theorem_closed_from_evidence (C : CompletenessTheoremPackage) (E : CompletenessTheoremEvidence C) :
     CompletenessTheoremClosed C := by
-  exact And.intro E.validityImpliesTheoremClosed
-    (And.intro E.theoremImpliesValidityClosed E.completenessClosed)
+  exact And.intro E.deductiveSystemClosed (And.intro E.soundnessClosed (And.intro E.completenessClosed E.finiteModelPropertyClosed))
 
 end LogicalAspectsLukasiewiczPostAlgebrasTheoremCanonicalLaneLean
 end HautevilleHouse
